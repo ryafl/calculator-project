@@ -20,6 +20,7 @@
 	text-decoration: none;
 	font-size: 16px;
 	cursor: pointer;
+	transition: all .09s ease;
 }
 
 .displayContainer {
@@ -91,3 +92,4 @@
 	background-color: rgba(71, 136, 241, 1);
 	color: white;
 }
+

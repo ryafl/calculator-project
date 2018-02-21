@@ -16,7 +16,7 @@ window.addEventListener('keydown', function(e) {
 		e.key == '-' || e.key == '*' || e.key == '/' || e.key == '.' || e.key == '=') {
 		addToArray(e.key);
 	}
-	if (e.key == 'Enter') {
+	if (e.key == 'Enter') { //This deals with recording the keys on keyboard for calculator
 		addToArray('=');
 	}
 	if (e.key == 'Backspace') {
@@ -27,11 +27,13 @@ window.addEventListener('keydown', function(e) {
 
 
 
+
+
 function addToArray(butVal) {
 	let buttonValue = butVal.toString();
 	let decContinue = 'Yes';
 	if (buttonValue == '.') {
-		decContinue = decimalCheck(buttonValue);
+		decContinue = decimalCheck(buttonValue); //All keys and selections are added to an array then checked for value to decide what to do
 	}
 	if (decContinue == 'no') {
 		let pleaseWork = 0;
@@ -68,7 +70,7 @@ function addToArray(butVal) {
 		}
 
 		if (equationArray[i] == '=') {
-			equationArray[i] = ' =';
+			equationArray[i] = ' ='; //equals sign is now live 
 			equalsButton = true;
 		}
 
@@ -84,7 +86,7 @@ function addToArray(butVal) {
 
 	let negArray = equationArray.slice(0, equationArray.length);
 	for (let j = 0; j<negArray.length; j++) {
-		if(negArray[j] == '(-)') {
+		if(negArray[j] == '(-)') { //Allows me to keep negative and minus signs seperate
 			negArray[j] = '-';
 		}
 	}
@@ -99,7 +101,7 @@ function addToArray(butVal) {
 	displayCont.appendChild(bigDisplay);
 
 	if (equalsButton) {
-		operate(equationString);
+		operate(equationString); //once equals button is live then its time to solve
 	}
 
 
@@ -108,14 +110,14 @@ function addToArray(butVal) {
 function operate(stringVal) {
 	let checkArray = stringVal.split(" ");
 	let equalSignRemover = checkArray.length - 1;
-	checkArray.splice(equalSignRemover, 1);
+	checkArray.splice(equalSignRemover, 1); //splits the string and turns it into an array to operate
 	let returnDisplay = "";
 	let operateArray = [];
 
 	for (let k = 0; k<checkArray.length; k++) {
 		let z = k % 2;
 		if (z == 0) {
-			let numbaCheck = parseFloat(checkArray[k]);
+			let numbaCheck = parseFloat(checkArray[k]); //checks that even numbers in the array are numbers
 			//if (numbaCheck == NaN) {
 			if (isNaN(numbaCheck) == true) {
 				returnDisplay = "Error";
@@ -128,7 +130,7 @@ function operate(stringVal) {
 		}
 		else if ( z == 1) {
 			let OC = checkArray[k];
-			if (OC == '+' || OC == '-' || OC == '*' || OC == '/') {
+			if (OC == '+' || OC == '-' || OC == '*' || OC == '/') { //checks that odd numbers are operators
 				operateArray[k] = OC;
 			}
 			else {
@@ -142,7 +144,7 @@ function operate(stringVal) {
 		let lengthCounter = operateArray.length;
 		for (let a = 0; a<lengthCounter; a++) {
 			if (operateArray[a] == '*') {
-				let multiplyVal = multiply(operateArray[a-1], operateArray[a+1]);
+				let multiplyVal = multiply(operateArray[a-1], operateArray[a+1]); //PEMDAS so multiplication and division go first from left to right
 				operateArray.splice(a-1, 3, multiplyVal);
 				a = 0;
 				lengthCounter -=2;
@@ -238,7 +240,7 @@ function subtract(num1, num2) {
 
 function decimalCheck(input) {
 	let returnVal = 'yes';
-	for (let r = equationArray.length; r > -1; r--) {
+	for (let r = equationArray.length; r > -1; r--) { //makes sure there aren't two decimals in the same number
 		if (equationArray[r] == input) {
 			returnVal = "no";
 			break;
@@ -250,3 +252,5 @@ function decimalCheck(input) {
 	}
 	return returnVal;
 }
+
+
