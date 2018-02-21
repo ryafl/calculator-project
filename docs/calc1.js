@@ -11,13 +11,26 @@ for (let x = 0; x<buttons.length; x++) {
 	});
 }
 
+window.addEventListener('keydown', function(e) {
+	if (e.key == 1 || e.key ==2 || e.key ==3 || e.key ==4 || e.key == 5 || e.key ==6 || e.key ==7 || e.key ==8 || e.key ==9 || e.key ==0 || e.key == '+' ||
+		e.key == '-' || e.key == '*' || e.key == '/' || e.key == '.' || e.key == '=') {
+		addToArray(e.key);
+	}
+	if (e.key == 'Enter') {
+		addToArray('=');
+	}
+	if (e.key == 'Backspace') {
+		addToArray('DEL');
+	}
+
+});
+
 
 
 function addToArray(butVal) {
 	let buttonValue = butVal.toString();
 	let decContinue = 'Yes';
 	if (buttonValue == '.') {
-		console.log(buttonValue);
 		decContinue = decimalCheck(buttonValue);
 	}
 	if (decContinue == 'no') {
@@ -186,8 +199,8 @@ function operate(stringVal) {
 }
 
 function multiply(num1, num2) {
-	let one = parseInt(num1 * 100000);
-	let two = parseInt(num2 * 100000);
+	let one = Math.round(num1 * 100000);
+	let two = Math.round(num2 * 100000);
 	let bigAns = one * two;
 	let ans = bigAns/ 10000000000;
 	return ans;
@@ -198,26 +211,26 @@ function divide(num1, num2) {
 		return 'Error';                  //Catching divide by zero 
 	}
 	else {
-		let one = parseInt(num1 * 100000);
-		let two = parseInt(num2 * 100000);
+		let one = Math.round(num1 * 100000);
+		let two = Math.round(num2 * 100000);
 		let bigAns = one / two;
-		let medAns = parseInt(bigAns * 100000)
+		let medAns = Math.round(bigAns * 100000)
 		let ans = medAns / 100000;
 	return ans;
 	}
 }
 
 function add(num1, num2) {
-	let one = parseInt(num1 * 100000);
-	let two = parseInt(num2 * 100000);
+	let one = Math.round(num1 * 100000);
+	let two = Math.round(num2 * 100000);
 	let bigAns = one + two;
 	let ans = bigAns / 100000;
 	return ans;
 }
 
 function subtract(num1, num2) {
-	let one = parseInt(num1 * 100000);
-	let two = parseInt(num2 * 100000);
+	let one = Math.round(num1 * 100000);
+	let two = Math.round(num2 * 100000);
 	let bigAns = one - two;
 	let ans = bigAns / 100000;
 	return ans;
